@@ -1,46 +1,78 @@
-# `STM32F401 Black Pill Template`
+# `STM32F401 Embedded Rust Black Pill Template`
 
-> A template for the STM32F4xx Black Pill Board
+> An embedded rust template for the STM32F4xx Black Pill Board
+
+## Prerequisite
+
+You need to have a stable version of `rust` installed. Make sure your version is `> 1.6`
+
+```console
+rustup --version
+```
+
+You need to install some tools and the correct target:
+
+```console
+rustup target add thumbv7em-none-eabihf
+```
+
+Install `cargo-generate` to generate a project from this template
+
+```console
+cargo install cargo-generate
+```
+
+Install cargo `flash` and `embed` utility to flash or debug your program
+
+```console
+cargo install cargo-flash
+```
+
+```console
+cargo install cargo-embed
+```
+
+## Use this template
 
 Generate a project with this template:
 
-``` console
-$ cargo generate --git https://github.com/SailnMobula/stm32f4-blackpill-quickstart
+```console
+cargo generate --git https://github.com/EXXETA/stm32f4-blackpill-quickstart.git
 ```
 
 Give your project a name and `cd` into it:
 
-``` console
-$ cd my-app
+```console
+cd my-app
 ```
 
 Build it
 
-``` console
-$ cargo build --release
+```console
+cargo build --release
 ```
 
 Flash it:
 
 ```console
-& cargo flash --release --chip STM32F401CEUx
+cargo flash --release --chip STM32F401CEUx
 ```
 
-Or flash the example it:
+Or build and flash the example:
 
 ```console
-& cargo flash --example dht22 --chip STM32F401CEUx
+cargo flash --example dht22 --chip STM32F401CEUx
 ```
 
-You might need to change the chi `STM32F401CEUx` p to your used chip
+You might need to change the chip `STM32F401CEUx` to your used chip, if you use a different board or chip.
 
-Debug it
+You can debug it by starting a debug session on your chip
 
 ```console
-& cargo embed --release
+cargo embed --release
 ```
 
-In another terminal start gdb
+And in another terminal start gdb
 
 ```console
 & arm-none-eabi-gdb target/thumbv7em-none-eabihf/debug/hydroponic-stm32f4
